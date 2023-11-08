@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="../../SL_SCHEDULER" default="compile" name="LNK1P">
+	
+	<!-- Project Default Directory -->
+	<property name="src.dir" location="${basedir}\src"/>
+	<property name="lib.dir" location="${basedir}\lib"/>
+	<property name="classes.dir" location="${basedir}\classes"/>
+	<property name="conf.dir" location="${basedir}\conf"/>
+	
+	<!-- Project Default Classpath -->
+	<path id="project.classpath">
+		<fileset dir="${lib.dir}">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+
+	<echo message ="#### SET PROJECT CLASSPATH ####"/>
+
+	<!-- Make Directory -->
+	<target name="init">
+		<tstamp>
+			<format property="time" pattern="yyyy-MM-dd hh:mm:ss" />
+			<format property="jardate" pattern="yyMM" />
+		</tstamp>
+		<mkdir dir="${basedir}\classes"/>
+	</target>
+
+	<echo message ="#### COMPILE COMPLETE ####"/>
+
+	<target name="compile" depends="init">
+		<javac destdir="${basedir}\classes" srcdir="${src.dir}" includes="syslink/**" excludes="syslink/scheduler/test/**" 
+			optimize="true" debug="true" deprecation="true" encoding="utf-8" includeantruntime="false">
+			<classpath refid="project.classpath"/>
+		</javac>
+		<jar destfile="${lib.dir}\syslink_scheduler_v1.jar" basedir="${classes.dir}" excludes="syslink/scheduler/test/**">
+			<manifest>
+				<attribute name="Built-By" value="LNK1P"/>
+				<attribute name="Jar-Title" value="Core library"/>
+				<attribute name="Jar-Version" value="0.0.1"/>
+				<attribute name="Jar-Vendor" value="LNK1P co.,ltd"/>
+				<attribute name="Last-Updated-Date" value="${time}"/>
+			</manifest>
+		</jar>
+		
+	</target>
+</project>

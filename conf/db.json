@@ -1,0 +1,14 @@
+{
+  "jdbcurl"     : "jdbc:mariadb://SYSDBM:3306/SYSLINK",
+  "username"    : "syslink",
+  "password"    : "ENC:dKY5VWWcB/TtlIvpeAXzAQ==",
+  "driver"      : "org.mariadb.jdbc.Driver",
+  "pool"        : "POOLNAME",
+  "max"         : 10,
+  "min"         : 5,
+  "lifetime"    : 1200000,
+  "timeout"     : 60000,
+  "idleTimeout" : 600000,
+  "autocommit"  : true,
+  "injectionFilter" : false
+}
