@@ -51,6 +51,7 @@ public class HolidayTask extends TimerTask{
 	@Override
 	public void run() {
 		if(DateUtils.getCurrentDay("dd").equals("01") || DateUtils.getCurrentDay("dd").equals("02")) {
+			
 		}else {return ;}
 		
 		logger.info("Holiday Start");
