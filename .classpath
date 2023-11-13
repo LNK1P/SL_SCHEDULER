@@ -19,5 +19,6 @@
 	<classpathentry kind="lib" path="lib/reactor-core-3.5.9.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-2.0.9_logback-1.3.11.jar"/>
 	<classpathentry kind="lib" path="lib/syslink_lib_2311.jar"/>
+	<classpathentry kind="lib" path="lib/stax2-api-3.0.1.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

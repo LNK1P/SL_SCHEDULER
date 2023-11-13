@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import syslink.lib.lang.CommonUtils;
 import syslink.lib.lang.DateUtils;
 import syslink.scheduler.task.code.BinTask;
+import syslink.scheduler.task.holiday.HolidayTask;
 
 public class Daemon {
 
@@ -35,6 +36,20 @@ public class Daemon {
 		calBin.set(Calendar.SECOND, 0);
 		new Timer().scheduleAtFixedRate(new BinTask(), calBin.getTime(), DAY);
 		logger.info("CODE BIN 에 대한 Redis Uploader scheduled : {}", calBin.getTime());
+		
+		
+		
+		Calendar calHoliday = Calendar.getInstance();
+		calHoliday.set(Calendar.DATE, 1); //다음날 부터 해야 하나. 
+		calHoliday.set(Calendar.AM_PM, Calendar.AM);
+		calHoliday.set(Calendar.HOUR, 6);
+		calHoliday.set(Calendar.MINUTE, 00);
+		calHoliday.set(Calendar.SECOND, 0);
+		new Timer().scheduleAtFixedRate(new HolidayTask(), calHoliday.getTime(), DAY);
+		logger.info("환율 수취 및 업데이트 ExcTask scheduled : {}", calHoliday.getTime());
+
+		
+		
 
 	}
 	

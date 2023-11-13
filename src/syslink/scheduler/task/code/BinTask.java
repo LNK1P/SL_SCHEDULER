@@ -6,16 +6,16 @@ import java.util.TimerTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.lettuce.core.api.StatefulRedisConnection;
 import syslink.lib.db.Retrieve;
 import syslink.lib.map.SharedMap;
 import syslink.lib.redis.Redis;
+import syslink.lib.redis.RedisUtils;
 import syslink.scheduler.main.Daemon;
 
 public class BinTask extends TimerTask {
 
 	private static Logger logger 				= LoggerFactory.getLogger(Daemon.class);
-	private static final String DB_CD_BIN = "DB_CD_BIN";
+	private static final String DB_CODE_BIN = "DB_CODE_BIN";
 	
 	
 	
@@ -26,20 +26,18 @@ public class BinTask extends TimerTask {
 	public void run() {
 		logger.info("BinTask Start");
 		List<SharedMap<String,Object>> list = new Retrieve()
-			.table("SYSLINK.CD_BIN")
+			.table("CODE.BIN_KR")
 			.select().getRows();
 		
 		if(list.size() > 0) {
+			logger.info("bin loaded : {}",list.size());
 			
-			StatefulRedisConnection<String, SharedMap<String,Object>> conn = Redis.getSharedMap();
-			
+			int i =1;
 			for(SharedMap<String,Object> map : list) {
 				if(!map.isEquals("id", "")) {
-					conn.async().hset(DB_CD_BIN, map.getString("id"), map);
+					RedisUtils.setHash(DB_CODE_BIN, map.getString("id"), map);
 				}
 			}
-			
-			conn.close();
 		}
 		logger.info("BinTask End");
 
