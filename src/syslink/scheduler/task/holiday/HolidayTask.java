@@ -125,15 +125,18 @@ public class HolidayTask extends TimerTask{
 						@SuppressWarnings("unchecked")
 						LinkedHashMap<String,Object> items = (LinkedHashMap<String,Object>)body.get("items");
 						LinkedHashMap<String,Object> item = (LinkedHashMap<String,Object>)items.get("item");
-						
-						holidays.add(MsgUtils.format(format, item.get("locdate"), item.get("isHoliday"), item.get("dateName")));
+						if(CommonUtils.toString(item.get("isHoliday")).equals("Y")) {
+							holidays.add(MsgUtils.format(format, item.get("locdate"), item.get("isHoliday"), item.get("dateName")));
+						}
 					}else {
 						@SuppressWarnings("unchecked")
 						LinkedHashMap<String,Object> items = (LinkedHashMap<String,Object>)body.get("items");
 						
 						List<LinkedHashMap<String,Object>> itemList = (List<LinkedHashMap<String,Object>>)items.get("item");
 						for(LinkedHashMap<String,Object> item : itemList) {
-							holidays.add(MsgUtils.format(format, item.get("locdate"), item.get("isHoliday"), item.get("dateName")));
+							if(CommonUtils.toString(item.get("isHoliday")).equals("Y")) {
+								holidays.add(MsgUtils.format(format, item.get("locdate"), item.get("isHoliday"), item.get("dateName")));
+							}
 						}
 						
 					}
